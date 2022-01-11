@@ -14,7 +14,7 @@ output:
 ## 1. Opis podatkov
 
 Zbrali smo meritve radija lusk in telesne dolzine na vzorcu 38 enoletnih maloustih basov (lat. Micropterus
-dolomieu). Podatke smo zapisali v dokument, ki ima 2 stolpce:
+dolomieu). Podatke smo zapisali v dokument, ki ima 2 stolpca:
 \begin{enumerate}
 \item $dolzina$ dolzina je numericna zvezna spremenljivka, ki predstavlja dolzino telesa (v milimetrih).
 \item $rlusk$ rlusk je numericna zvezna spremenljivka, ki predstavlja radij lusk (v milimetrih).
@@ -73,7 +73,7 @@ Prikažimo dobljene podatke na razsevnem diagramu.
 ```{r}
 par(las=1, cex=1.1, mar=c(4,4,2,2))
 plot(rlusk,dolzina, main="", ylim=c(50,170), xlim=c(1,5),
-ylab="dolzine ribe (mm)", xlab="radija lusk (mm)", lwd=2, axes=FALSE)
+ylab="dolzine ribe (mm)", xlab="radij lusk (mm)", lwd=2, axes=FALSE)
 axis(2,pos=1,at=seq(50,170,by=10),tcl=-0.2)
 axis(1,pos=50,at=seq(1,5,by=0.1),tcl=-0.2)
 arrows(x0=5,y0=1,x1=5.1,y1=1,length=0.1)
@@ -102,7 +102,7 @@ Točke na razsevnem diagramu se nahajajo okoli namišljene premice, tako da line
 (r<-cor(log(rlusk),log(dolzina)))
 ```
 
-Vrednost vzorčnega koeficienta korelacije je visoka ($r=0.9221425$), kar govori o visoki linearni povezanosti radija lusk in dolzine ribe. Dalje, koeficient korelacije je pozitiven, kar pomeni, da imajo ribe z vecjo dolzino vecji radij lusk manjše dolzine pa manjsi premer lusk.Koeficient korelacijej e sicer se kar visok, a v primerjavi s transformiranimi podatki($r=0.9351461$) opazimo padec povezanosti nasih podatkov.
+Vrednost vzorčnega koeficienta korelacije je visoka ($r=0.9221425$), kar govori o visoki linearni povezanosti radija lusk in dolzine ribe. Dalje, koeficient korelacije je pozitiven, kar pomeni, da imajo ribe z vecjo dolzino vecji radij lusk manjše dolzine pa manjsi radij lusk. Koeficient korelacije je sicer se kar visok, a v primerjavi s transformiranimi podatki($r=0.9351461$) opazimo padec povezanosti nasih podatkov.
  
 
 ## 4. Formiranje linearnega regresijskega modela
@@ -148,7 +148,7 @@ title(xlab="Teoretični kvantili", ylab= "St. ostanki",
 main="Normalnost porazdelitve")
 plot(model,which=3,caption="",ann=FALSE)
 title(xlab=expression(italic(widehat(y)==widehat(a)+widehat(b)*x)),
-ylab=expression(sqrt(paste("|St. ostanki|"))), main="Homogenost variance")
+ylab=expression(sqrt(paste("|Stevilo ostankov|"))), main="Homogenost variance")
 plot(model,which=4,caption="", ann=FALSE)
 title(xlab="Meritev",ylab="Cookova razdalja", main="Vpliv točk na model")
 ```
