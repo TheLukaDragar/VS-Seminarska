@@ -171,7 +171,7 @@ Za uporabljene podatke na grafu linearnosti modela ne opazimo vzorca ali manjkaj
 ### 2) Graf normalnosti porazdelitve naključnih napak
 Normalnost porazdelitve naključnih napak preverjamo preko grafa porazdelitve standardiziranih ostankov. Na $x$-osi Q - Q grafa normalne porazdelitve so podani teoretični kvantili, na $y$ - osi pa kvantili standardiziranih ostankov. Če dobljene točke na Q-Q grafu tvorijo premico (z manjšimi odstopanji), zaključimo, da je porazdelitev naključnih napak (vsaj približno) normalna.
 
-Za podatke o masi in porabi goriva avtomobilov lahko zaključimo, da so naključne napake normalno porazdeljene (ni večjih odstopanj od premice, razen za 2., 16., in 23. podatkovno točko).
+Za podatke o dolzini in radijev lusk lahko zaključimo, da so naključne napake normalno porazdeljene (ni večjih odstopanj od premice, razen za 2., 16., in 23. podatkovno točko).
 
 ### 3) Graf homogenosti variance
 Učinkovit graf za registriranje nekonstantne variance je graf korena standardiziranih ostankov v odvisnosti od $x$ ali od predvidenih vrednosti
