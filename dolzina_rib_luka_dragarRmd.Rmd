@@ -3,11 +3,18 @@ header-includes:
    - \usepackage[utf8]{inputenc}
    - \usepackage[slovene]{babel}
    
+   
+title: "Seminarska naloga iz Linearne Regresije"
+subtitle: "Verjetnost in Statistika"
+author: "Luka Dragar"
+date: "9.jan.2022"
+   
 output:
   pdf_document: default
   html_document: default
 ---
 
+\pagebreak
 
 # Linearna regresija: dolzina ribe 
 
@@ -16,8 +23,8 @@ output:
 Zbrali smo meritve radija lusk in telesne dolzine na vzorcu 38 enoletnih maloustih basov (lat. Micropterus
 dolomieu). Podatke smo zapisali v dokument, ki ima 2 stolpca:
 \begin{enumerate}
-\item $dolzina$ dolzina je numericna zvezna spremenljivka, ki predstavlja dolzino telesa (v milimetrih).
-\item $rlusk$ rlusk je numericna zvezna spremenljivka, ki predstavlja radij lusk (v milimetrih).
+\item $dolzina$ je numericna zvezna spremenljivka, ki predstavlja dolzino telesa (v milimetrih).
+\item $rlusk$ je numericna zvezna spremenljivka, ki predstavlja radij lusk (v milimetrih).
 
 \end{enumerate}
 Baza podatkov se imenuje \emph{jezero.csv}. Najprej bomo prebrali podatke v R in zatem pogledali strukturo podatkov
@@ -28,7 +35,7 @@ str(jezero)
 dolzina<-jezero$dolzina
 rlusk<-jezero$rlusk
 ```
-
+\pagebreak
 
 ## 2. Opisna statistika
 
@@ -66,6 +73,7 @@ sd(log(rlusk))
 Opazimo, da log(radija lusk) vzorca rib varira od $0.09531$mm do $1.58924$mm, s povprečjem $0.80701$ in standardnim odklonom $0.3654564$ mm$.
 
 Razpon vrednosti dolzine in radija lusk nam pomaga pri izbiri mej na oseh razsevnega diagrama.
+\pagebreak
 
 ## 3. Razsevni diagram in vzorčni koeficient korealcije
 
@@ -79,6 +87,7 @@ axis(1,pos=50,at=seq(1,5,by=0.1),tcl=-0.2)
 arrows(x0=5,y0=1,x1=5.1,y1=1,length=0.1)
 arrows(x0=50,y0=5,x1=50,y1=5.1,length=0.1)
 ```
+\pagebreak
 
 Prikažimo transformirane podatke na razsevnem diagramu.
 
@@ -131,12 +140,12 @@ Za podatke majhne in srednje velikosti vzorca je osamelec podatkovna točka, kat
 jezero[abs(rstandard(model))>2,]
 ```
 Dve podatkovni točki sta osamelca in se nanašata na dve ribi z nenavadno dolzino glede na njun radij lusk.
+\pagebreak
 
 ## 6. Preverjanje predpostavk linearnega regresijskega modela
 
 Predpostavke linearnega regresijskega modela bomo preverili s štirimi grafi, ki se imenujejo diagnostični grafi (ali grafi za diagnostiko modela). Če neke predpostavke modela niso izpolnjene, so lahko ocene neznanih parametrov, $p$-vrednost testa, intervali zaupanja in intervali predikcije netočni.
 
-<!-- S pomočjo parametra \emph{mfrow=c(2,2)} rišemo 4 grafe na eni sliki (2 vrstici in 2 stolpca). Grafe lahko dobimo z enim ukazom \emph{plot(model, which=1:4)}, vse ostale spremembe se nanašajo na nazive na grafu v slovenščini. Na prvem in tretjem grafu je narisana funkcija glajenja (označena z rdečo barvo), ki se lahko odstrani s pomočjo parametra \emph{add.smooth=FALSE}. -->
 
 ```{r}
 par(mfrow=c(2,2),mar=c(4,3,2,1))
@@ -175,23 +184,17 @@ suppressWarnings(library(car))
 ncvTest(model)
 ```
 Na osnovi rezultata Breusch-Paganovega testa (testna statistika $\Large \chi^{2}=0.4018547$, $df = 1$, p-vrednost $p$ = 0.52613 > 0.05), ne zavrnemo ničelne domneve. Ni dovolj dokazov, da varianca naključnih napak ni homogena.
+\pagebreak
 
 ### 4) Graf vpliva posameznih točk na model
 Vpliv $i$-te točke na linearni regresijski model merimo s Cookovo razdaljo $D_{i}$, $1\le i\le n$. Če $i$-ta točka ne vpliva močno na model, bo $D_i$ majhna vrednost.
 Če je $D_i \geq c$, kjer je $c = F_{2,n-2;0.5}$ mediana Fisherjeve porazdelitve z $2$ in $n- 2$ prostostnima stopnjama, $i$-ta točka močno vpliva na regresijski model.
-
-<!-- \begin{enumerate} -->
-<!-- \item Vprašajmo se, ali so ti podatki neobičajni ali drugačni od ostalih podatkov? Če je odgovor pritrdilen, jih lahko poskusimo odstraniti in konstruirati linearni model brez njih. -->
-<!-- \item Vprašajmo se, ali je linearni regresijski model validen za naše podatke? Mogoče podatkom boljše ustreza neki drugi model. Poskusimo konstruirati neki drugi model, ki vključuje še druge spremenljivke ali poskusimo s transformiranjem Y ali X. -->
-<!-- \end{enumerate} -->
-
 Na grafu vpliva točk na linearni regresijski model so vedno označene tri točke z najvišjo Cookovo
 razdaljo. Za naše podatke, to so 2., 12., in 16. podatkovne točka. Spomnimo se, da smo te
 točke identificirali kot osamelce razen 12..
 Zdaj poglejmo na razsevnem diagramu po čem so te tri točke drugačne od ostalih. Kodi za razsevni diagram dodamo če dve vrstici, s katerima bomo dodali ocenjeno regresijsko premico in pobarvali te tri točke.
 
 ```{r, fig.align="center",out.width="90%"}
-
 ld<-log(dolzina)
 pd<-log(rlusk)
 par(las=1, mar=c(4,4,2,3))
@@ -204,9 +207,7 @@ arrows(x0=3.9,y0=1.6,x1=3.9,y1=1.7,length=0.1)
 abline(model,lwd=2)
 points(log(rlusk)[c(2,12,16)],log(dolzina)[c(2,12,16)],col="red",pch=19)
 text(log(rlusk)[c(2,12,16)],log(dolzina)[c(2,12,16)],labels=rlusk[c(2,12,16)],pos=3,cex=0.8)
-
 ```
-
 
 Na razsevnem diagramu opazimo, da so vse tri točke najbolj oddaljene od ocenjene regresijske premice (oziroma jim ustrezajo največji ostanki). Lahko preverimo še, ali je njihov vpliv velik, oziroma ali je njihova Cookova razdalja večja ali enaka od mediane Fisherjeve porazdelitve z 2
 in 30 prostostnimi stopnjami.
@@ -215,6 +216,7 @@ in 30 prostostnimi stopnjami.
 any(cooks.distance(model)[c(2,12,16)]>=qf(0.5,2,nrow(jezero)-2))
 ```
 Nobena od teh točk nima velikega vpliva na linearni regresijski model, zato jih ni potrebno odstraniti.
+\pagebreak
 
 ## 7. Testiranje linearnosti modela in koeficient determinacije
 Poglejmo R-jevo poročilo o modelu.
@@ -231,6 +233,7 @@ Izračunajmo $95\%$ interval zaupanja za neznani naklon in odsek regresijske pre
 round(confint(model),3)
 ```
 Interval zaupanja za odsek je enak $I_a = [3.837 , 4.012]$ in interval zaupanja za naklon $I_b = [0.671, 0.868]$.
+\pagebreak
 
 ## 9. Interval predikcije za vrednost $Y$ pri izbrani vrednosti $X$
 Pri predvidevanju vrednosti dolzine ribe nas zanima bodoča vrednost spremenljivke Y pri izbrani vrednosti spremenljivke $X = x_0$. Ne zanima nas le predvidena vrednost $\hat{y} = 3.9244 + 0.7698x_0$ dolocenega radija lusk $x_0$, ampak želimo tudi oceniti spodnjo in zgornjo mejo, med katerima se verjetno nahaja dolzina različnih rib z luskami takega radija.
